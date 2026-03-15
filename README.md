@@ -7,3 +7,7 @@ Features:
 - Random Forest classifier for sentiment prediction.
 - Streamlit-based UI to interactively predict tweet sentiment.
 
+Installation:
+1. Clone this repository:
+```bash
+git clone https://github.com/Sukhbeer16/Twitter-Sentiment-Analysis-NLP.git
