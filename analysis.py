@@ -1,40 +1,57 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
+import numpy as np
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.ensemble import RandomForestClassifier
-import pickle
+from sklearn.pipeline import Pipeline
 
-# Load dataset
-data = pd.read_csv("tweets_sample.csv")  # Replace with actual dataset path
-data = data[['tweet', 'sentiment']]
+import joblib
+import re
 
-# Simple preprocessing
-def preprocess(text):
-    text = text.lower()          # Lowercase
-    text = text.replace('@', '') # Remove mentions
-    text = text.replace('#', '') # Remove hashtags
-    text = text.replace('\n', ' ')
+
+# ---------------- LOAD DATA ----------------
+df = pd.read_csv("twitter.csv")   # your dataset file
+
+# ---------------- CLEANING FUNCTIONS ----------------
+def clean_text(text):
+    text = str(text).lower()
+
+    # remove URLs
+    text = re.sub(r'http\S+|www.\S+', '', text)
+
+    # remove retweets
+    text = re.sub(r'\brt\b', '', text)
+
+    # remove special characters
+    text = re.sub(r'[^a-z\s]', '', text)
+
+    # remove extra spaces
+    text = re.sub(r'\s+', ' ', text).strip()
+
     return text
 
-data['clean_tweet'] = data['tweet'].apply(preprocess)
 
-# Train-test split
-X_train, X_test, y_train, y_test = train_test_split(
-    data['clean_tweet'], data['sentiment'], test_size=0.2, random_state=42
-)
+# ---------------- APPLY CLEANING ----------------
+df['text'] = df['text'].fillna("").apply(clean_text)
 
-# TF-IDF vectorization
-vectorizer = TfidfVectorizer(max_features=1000)
-X_train_vec = vectorizer.fit_transform(X_train)
-X_test_vec = vectorizer.transform(X_test)
+# ---------------- FEATURES & LABEL ----------------
+X = df['text']
+y = df['sentiment']   # Positive / Negative / Neutral
 
-# Train Random Forest Classifier
-rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
-rf_model.fit(X_train_vec, y_train)
+# ---------------- ML PIPELINE ----------------
+model = Pipeline([
+    ('tfidf', TfidfVectorizer(ngram_range=(1,2), max_features=5000)),
+    ('clf', RandomForestClassifier(n_estimators=100, random_state=42))
+])
 
-# Save trained model and vectorizer for Streamlit app
-with open("rf_model.pkl", "wb") as model_file:
-    pickle.dump(rf_model, model_file)
+# ---------------- TRAIN MODEL ----------------
+model.fit(X, y)
 
-with open("vectorizer.pkl", "wb") as vec_file:
-    pickle.dump(vectorizer, vec_file)
+# ---------------- TEST EXAMPLE ----------------
+print(model.predict(["I love this product"]))
+print(model.predict(["This is the worst experience"]))
+
+# ---------------- SAVE MODEL ----------------
+joblib.dump(model, "sentiment_model.pkl")
+
+print("✅ Model trained and saved successfully!")
