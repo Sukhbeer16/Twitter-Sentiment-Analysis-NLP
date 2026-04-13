@@ -1,0 +1,60 @@
+##HERE HISTORY OF THE SENTIMENTS WE ANALYSED WITH RESULT AND TIME WILL BE GENERATE!!
+##FEW EXAMPLES:
+
+[
+  {
+    "text": "i hate you",
+    "sentiment": "Negative",
+    "time": "00:42"
+  },
+  {
+    "text": "sukhbeer is a bad girl",
+    "sentiment": "Negative",
+    "time": "00:43"
+  },
+  {
+    "text": "i am  a great guy",
+    "sentiment": "Positive",
+    "time": "00:46"
+  },
+  {
+    "text": "@john why are u still here?",
+    "sentiment": "Neutral",
+    "time": "00:47"
+  },
+  {
+    "text": "i am a great guy",
+    "sentiment": "Positive",
+    "time": "00:49"
+  },
+  {
+    "text": "hellooo i  am you  and you am i",
+    "sentiment": "Neutral",
+    "time": "00:49"
+  },
+  {
+    "text": "im so glad THAT YOU ARE trying @john!!!!!!!!!!!!!1",
+    "sentiment": "Positive",
+    "time": "00:50"
+  },
+  {
+    "text": "how are you???",
+    "sentiment": "Neutral",
+    "time": "16:42"
+  },
+  {
+    "text": "you did a good job! weel done!!",
+    "sentiment": "Positive",
+    "time": "16:42"
+  },
+  {
+    "text": "your project is not upto date ut needs improvement",
+    "sentiment": "Neutral",
+    "time": "16:42"
+  },
+  {
+    "text": "I HATE YOUUUUUUUUUUUUUU",
+    "sentiment": "Negative",
+    "time": "16:43"
+  }
+]
