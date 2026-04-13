@@ -52,13 +52,13 @@ The project demonstrates a complete ML pipeline including:
 
 ## 📁 Project Structure
 Twitter-Sentiment-Analysis-NLP/
-│
-├── twitter.ipynb # Data analysis + model training
-├── analysis.py # ML training pipeline script
-├── twitter.csv # Dataset
-├── sentiment_model.pkl # Saved trained model
-├── requirements.txt # Dependencies
-└── README.md # Project documentation
+
+── twitter.ipynb # Data analysis + model training
+── analysis.py # ML training pipeline script
+── twitter.csv # Dataset
+── sentiment_model.pkl # Saved trained model
+── requirements.txt # Dependencies
+── README.md # Project documentation
 
 
 ---
